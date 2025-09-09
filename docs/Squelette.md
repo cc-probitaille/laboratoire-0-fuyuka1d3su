@@ -1,9 +1,9 @@
 # Identification de l'étudiant
 
-- <nomComplet1>Entrer votre nom</nomComplet1>
-- <courriel1>Entrer votre courriel</courriel1>
-- <codeMoodle1>Entrer votre code moodle obtenu à partir de Signets, 2 lettres majuscule avec 5 chiffres</codeMoodle1>
-- <githubAccount1>Entrer l'identifiant de votre compte github</githubAccount1>
+- <nomComplet1>Nazim Baraka</nomComplet1>
+- <courriel1>nazim.baraka.1@ens.etsmtl.ca</courriel1>
+- <codeMoodle1>AU65670</codeMoodle1>
+- <githubAccount1>fuyuka1d3su</githubAccount1>
 
 # Squelette pour un API simple dans Node, Express et TypeScript
 
@@ -24,11 +24,11 @@ Ce squelette est proposé pour commencer les projets en LOG210. Il possède les 
 
 Le code d'origine a été expliqué dans ce [texte de blogue](http://mherman.org/blog/2016/11/05/developing-a-restful-api-with-node-and-typescript/#.WB3zyeErJE4).
 
-Dans le cadre du cours [LOG210 de l'ÉTS](https://www.etsmtl.ca/etudes/cours/log210), nous utilisons la méthodologie documentée par [Craig Larman dans son livre *Applying UML and Patterns*](http://www.craiglarman.com/wiki/index.php?title=Book_Applying_UML_and_Patterns). Ce livre documente beaucoup de principes avec des exemples en Java, qui n'est plus à la mode comme à l'époque où le livre a été écrit.
+Dans le cadre du cours [LOG210 de l'ÉTS](https://www.etsmtl.ca/etudes/cours/log210), nous utilisons la méthodologie documentée par [Craig Larman dans son livre _Applying UML and Patterns_](http://www.craiglarman.com/wiki/index.php?title=Book_Applying_UML_and_Patterns). Ce livre documente beaucoup de principes avec des exemples en Java, qui n'est plus à la mode comme à l'époque où le livre a été écrit.
 
 Pourtant, il est encore possible de suivre cette méthodologie avec des technologies modernes comme JavaScript, Node.js, surtout en utilisant TypeScript. Cependant, il n'est pas évident de trouver des exemples de ces technologies qui respectent les éléments clés de la méthodologie de Larman: la séparation des couches (présentation, domaine) avec les opérations système et les classes du domaine.
 
-Ce squelette montre ces aspects importants, dans le contexte du *Jeu de dés*, qui est l'exemple utilisé dans le chapitre 1 du livre du cours. Nous avons modifié l'exemple pour le rendre un peu plus complexe (plusieurs opérations système). Les diagrammes (faits avec [PlantUML](https://stackoverflow.com/questions/32203610/how-to-integrate-uml-diagrams-into-gitlab-or-github)) sont présentés plus bas dans la partie Artefacts.
+Ce squelette montre ces aspects importants, dans le contexte du _Jeu de dés_, qui est l'exemple utilisé dans le chapitre 1 du livre du cours. Nous avons modifié l'exemple pour le rendre un peu plus complexe (plusieurs opérations système). Les diagrammes (faits avec [PlantUML](https://stackoverflow.com/questions/32203610/how-to-integrate-uml-diagrams-into-gitlab-or-github)) sont présentés plus bas dans la partie Artefacts.
 
 L'éditeur [Visual Studio Code](https://code.visualstudio.com/) est très utile, mais n'est pas nécessaire avec ce squelette.
 
@@ -45,10 +45,11 @@ L'éditeur [Visual Studio Code](https://code.visualstudio.com/) est très utile,
 
      <p>
 
-     ![GIF animé de la fonctionnalité de l'application Jeu de Dés](https://user-images.githubusercontent.com/7606540/148088563-e4f7d26a-033b-4a77-8a9a-e56758dad1ee.gif)
+   ![GIF animé de la fonctionnalité de l'application Jeu de Dés](https://user-images.githubusercontent.com/7606540/148088563-e4f7d26a-033b-4a77-8a9a-e56758dad1ee.gif)
 
     </p>
    </details>
+
 1. Lancer les tests (pas besoin de lancer le serveur d'abord) - `npm test`
 
 ## Développement piloté par les tests (TDD)
@@ -89,21 +90,21 @@ On peut utiliser ce fichier afin de créer des configurations d'exécution de d�
 
 ```json
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "command": "npm start",
-            "name": "Debug",
-            "request": "launch",
-            "type": "node-terminal"
-        },
-        {
-            "command": "npm run start:watch",
-            "name": "Debug:Watch",
-            "request": "launch",
-            "type": "node-terminal"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "command": "npm start",
+      "name": "Debug",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "npm run start:watch",
+      "name": "Debug:Watch",
+      "request": "launch",
+      "type": "node-terminal"
+    }
+  ]
 }
 ```
 
@@ -140,13 +141,13 @@ Pour plus d'informations au sujet de l'utilisation des breakpoints dans WebStorm
 
 Dans un design favorisant la maintenabilité, on évite que la couche Présentation ait la responsabilité de gérer les évènements système (opérations système). Larman présente dans son livre un exemple avec un JFrame (en Java Swing) à la figure F16.24. On l'adapte ici au contexte d'un service Web dans le framework Express (Node.js):
 
-![Diagramme de séparation des couches avec une opération système envoyée au contrôleur GRASP](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/figure-f16.24-web.puml)
+![Diagramme de séparation des couches avec une opération système envoyée au contrôleur GRASP](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/cc-probitaille/laboratoire-0-fuyuka1d3su/refs/heads/master/docs/modeles/figure-f16.24-web.puml)
 
 Dans la figure ci-dessus, l'objet `:JeuDeDes` (qui est un objet en dehors de la couche présentation) reçoit l'opération système `demarrerJeu(nom)` selon le principe GRASP Contrôleur. Ce squelette respecte cette séparation.
 
 Voici la même figure, mais sous forme de diagramme de séquence avec l'acteur. On y voit tous les détails sordides de l'implémentation avec Node Express. **Notez que cette figure est présentée pour faciliter la compréhension seulement. On ne produit pas ce genre de diagramme dans la méthodologie**.
 
-![Une opération système du DSS est envoyée par la couche présentation et reçue par un objet (le contrôleur GRASP) dans la couche domaine](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/dss-details-demarrerJeu.puml)
+![Une opération système du DSS est envoyée par la couche présentation et reçue par un objet (le contrôleur GRASP) dans la couche domaine](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/cc-probitaille/laboratoire-0-fuyuka1d3su/refs/heads/master/docs/modeles/dss-details-demarrerJeu.puml)
 
 ## Artefacts d'analyse et de conception
 
@@ -158,22 +159,27 @@ Voici la même figure, mais sous forme de diagramme de séquence avec l'acteur. 
 1. Le Joueur demande à lancer les dés.
 1. Le Système affiche le nom du joueur et le résultat de la partie, ainsi que le nombre de parties et le nombre de fois que le Joueur a gagné. Pour un lancer, si le total est égal à sept, le Joueur a gagné. Dans tous les autres cas, il a perdu.
 
-*Le Joueur répète l'étape 3 jusqu'à ce qu'il ait fini.*
+_Le Joueur répète l'étape 3 jusqu'à ce qu'il ait fini._
 
 4. Le Joueur demande à terminer le jeu.
 1. ~~Le Système affiche un tableau de bord avec les noms des joueurs et le ratio des parties gagnées (nombre de fois gagné / nombre de lancers).~~
 
+#### Redémarrer
+
+1. Le Joueur demande à redémarrer l'application.
+2. Le Système termine tous les jeux en cours et redémarre l'application.
+
 ### Diagramme de cas d'utilisation
 
-![Diagramme de cas d'utilisation](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/dcu.puml)
+![Diagramme de cas d'utilisation](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/cc-probitaille/laboratoire-0-fuyuka1d3su/refs/heads/master/docs/modeles/dcu.puml)
 
 ### Modèle du domaine
 
-![Diagramme de classe du Modèle du domaine](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/mdd.puml)
+![Diagramme de classe du Modèle du domaine](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/cc-probitaille/laboratoire-0-fuyuka1d3su/refs/heads/master/docs/modeles/mdd.puml)
 
 ### Diagramme de séquence système (DSS)
 
-![Diagramme de séquence système](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/dss-jouer.puml)
+![Diagramme de séquence système](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/cc-probitaille/laboratoire-0-fuyuka1d3su/refs/heads/master/docs/modeles/dss-jouer.puml)
 
 ### Contrats d'opération et Réalisations de cas d'utilisation (RDCU)
 
@@ -187,7 +193,7 @@ Voici la même figure, mais sous forme de diagramme de séquence avec l'acteur. 
 
 **RDCU**
 
-![Diagramme de séquence, demarrerJeu](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/rdcu-demarrerJeu.puml)
+![Diagramme de séquence, demarrerJeu](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/cc-probitaille/laboratoire-0-fuyuka1d3su/refs/heads/master/docs/modeles/rdcu-demarrerJeu.puml)
 
 #### Opération: `jouer(nom:String)`
 
@@ -200,7 +206,7 @@ Voici la même figure, mais sous forme de diagramme de séquence avec l'acteur. 
 
 **RDCU**
 
-![Diagramme de séquence, jouer](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/rdcu-jouer.puml)
+![Diagramme de séquence, jouer](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/cc-probitaille/laboratoire-0-fuyuka1d3su/refs/heads/master/docs/modeles/rdcu-jouer.puml)
 
 #### Opération: `terminerJeu(nom:String)`
 
@@ -208,6 +214,6 @@ Voici la même figure, mais sous forme de diagramme de séquence avec l'acteur. 
 
 - L'instance j de Joueur a été supprimée sur une base de correspondance avec nom
 
-![Diagramme de séquence, terminerJeu](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/rdcu-terminerJeu.puml)
+![Diagramme de séquence, terminerJeu](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/cc-probitaille/laboratoire-0-fuyuka1d3su/refs/heads/master/docs/modeles/rdcu-terminerJeu.puml)
 
 [README.md](../README.md)

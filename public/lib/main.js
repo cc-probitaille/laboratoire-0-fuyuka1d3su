@@ -13,6 +13,14 @@ window.addEventListener("load", function()
         });
     });
 
+    document.getElementById("redemarrer").addEventListener("click", function () {
+        fetch("/api/v1/jeu/redemarrerJeu")
+        .then(function()
+        {
+            location.reload();
+        });
+    });
+
     document.querySelectorAll("button.terminer").forEach(function(element)
     {
         element.addEventListener("click", function()

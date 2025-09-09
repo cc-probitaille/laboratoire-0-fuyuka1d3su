@@ -1,5 +1,6 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/uuC769Xa)
-<!-- 
+
+<!--
   Le lab0 dépend du squelette. Il faut actualiser le squelette en premier (le cas échéant) et en faire un merge.
   Voir https://stackoverflow.com/a/56577320/1168342 pour les détails. Ça marche bien.
   -->
@@ -21,7 +22,7 @@ Vous pouvez vous concentrer sur la méthodologie d'analyse et de conception qui 
 
 Dans les cours préalables à LOG210, vous devriez avoir déjà vu:
 
-- Les dépôts de code source en *git* (ici, c'est GitHub)
+- Les dépôts de code source en _git_ (ici, c'est GitHub)
 - La programmation orientée objet (ici, c'est TypeScript)
 - Les tests (ici, c'est Jest et SuperTest)
 
@@ -57,14 +58,14 @@ Quant à la méthodologie de travail, ce tutoriel vous permettra aussi de savoir
 ## Objectif de l'exercice
 
 Cet exercice vous amènera à travers des étapes à ajouter une nouvelle fonctionnalité au **Jeu de dés**.
-Vous devez réaliser le cas d'utilisation *Redémarrer* qui va simplement redémarrer le jeu.
+Vous devez réaliser le cas d'utilisation _Redémarrer_ qui va simplement redémarrer le jeu.
 Pour respecter le processus de génie logiciel enseigné dans LOG210, il faudra passer par les étapes suivantes:
 
 - actualiser la documentation de la fonctionnalité (cas d'utilisation)
 - actualiser des modèles de conception (diagrammes de séquence système et réalisations de cas d'utilisation);
 - écrire des tests pour la fonctionnalité;
 - écrire le code source;
-- remettre (anglais *commit*) les changements.
+- remettre (anglais _commit_) les changements.
 
 Les auxiliaires d'enseignement pourront vous aider si vous avez des questions.
 
@@ -96,7 +97,7 @@ Vous pouvez cocher chaque étape dans la liste suivante:
 - [ ] [cloner](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) le dépôt de code de ce laboratoire sur votre machine
 
   - :warning: Ne pas cloner le code dans un chemin qui contient des espaces ou des accents.
-  - Facultatif : Lire cette [Présentation de GitHub dans Visual Studio Code](https://learn.microsoft.com/fr-ca/training/modules/introduction-to-github-visual-studio-code/) de Microsoft. 
+  - Facultatif : Lire cette [Présentation de GitHub dans Visual Studio Code](https://learn.microsoft.com/fr-ca/training/modules/introduction-to-github-visual-studio-code/) de Microsoft.
 
 - [ ] faire un build du code
 
@@ -114,7 +115,7 @@ Vous pouvez cocher chaque étape dans la liste suivante:
 
     ```text
     ...
-    [2:52:01 p.m.] Projects in this build: 
+    [2:52:01 p.m.] Projects in this build:
         * tsconfig.json
 
     [2:52:01 p.m.] Project 'tsconfig.json' is out of date because output file 'dist/app.js' does not exist
@@ -154,7 +155,7 @@ Vous pouvez cocher chaque étape dans la liste suivante:
     FAIL test/squelette/identification-lab0.test.ts
       README identification
         × devrait trouver votre nom (2 ms)
-        × devrait trouver votre courriel  
+        × devrait trouver votre courriel
         × devrait trouver Votre code moodle
         × devrait trouver votre compte github
 
@@ -235,6 +236,7 @@ Vous pouvez cocher chaque étape dans la liste suivante:
   - Dans le terminal, `npm start`
 
 - [ ] exécuter l'application avec un navigateur moderne à l'URL [http://localhost:3000](http://localhost:3000)
+
   - [ ] démarrer une partie avec un joueur
   - [ ] essayer le bouton pour jouer
   - [ ] regarder la page Classement
@@ -244,32 +246,36 @@ Vous pouvez cocher chaque étape dans la liste suivante:
 - [ ] regarder comment dans `src/app.ts` un gabarit Pug `views/index.pug` est utilisé:
 
   ```typescript
-    // Route pour jouer (index)
-    router.get('/', (req, res, next) => {
-      res.render('index',
-        // passer objet au gabarit (template) Pug
-        {
-          title: `${titreBase}`,
-          user: user,
-          joueurs: JSON.parse(jeuRoutes.controleurJeu.joueurs)
-        });
-    });
+  // Route pour jouer (index)
+  router.get("/", (req, res, next) => {
+    res.render(
+      "index",
+      // passer objet au gabarit (template) Pug
+      {
+        title: `${titreBase}`,
+        user: user,
+        joueurs: JSON.parse(jeuRoutes.controleurJeu.joueurs),
+      }
+    );
+  });
   ```
 
   - La [barre de navigation `views/includes/navbar.pug` provient de Bootstrap](https://getbootstrap.com/docs/4.1/components/navbar/). Elle est personnalisée selon les valeurs dans l'objet (`user`) passé grâce à la fonctionnalité de [mixins de Pug](https://pugjs.org/language/mixins.html). Cet objet est initialisé plus haut dans `src/app.ts`:
 
     ```typescript
     // Extrait de src/app.ts
-    user = { nom: 'Pierre Trudeau', hasPrivileges: true, isAnonymous: false };
+    user = { nom: "Pierre Trudeau", hasPrivileges: true, isAnonymous: false };
     ```
 
     Cet objet sera un mécanisme de gérer les vues. Par exemple, si `objet.isAnonymous` est vrai, `navbar.pug` n'affiche pas de lien, car l'utilisateur n'est pas connu et donc doit se connecter pour avoir plus d'accès.
+
     > Dans cet exercice, vous n'avez pas à gérer les connexions, mais sachez que le squelette supporte cette dimension. Ça sera utile pour votre projet en équipe.
+
   - la technologie Bootstrap est chargée dans un en-tête (`views/includes/head.pug`) qui, lui, est inclus dans chaque page statique. Sachez que les versions de Bootstrap ont évolué assez rapidement et il faut faire attention à la version si vous trouvez un exemple intéressant que vous voulez réutiliser. La documentation de Bootstrap est excellente, donc vérifiez toujours avec ça.
   - les pages statiques définies avec Pug permettent de créer facilement une interface humain-machine, mais il doit y avoir des routes définies dans `src/app.ts` pour que les fichiers `.pug` soient bien rendus au navigateur.
-  - repérer dans le fichier `src/app.ts` la définition des *route handlers* pour les pages statiques, p. ex. `/` vers `views/index.pug` et `/stats` vers `views/stats.pug`. Cela est important pour étendre le squelette dans le cadre du projet en équipe. Il y a aussi des pages statiques pour aider avec la gestion des connexions (`views/signin.pug` et `views/signout.pug`) qui sont intégrées également dans le squelette (routes et barre de navigation).
+  - repérer dans le fichier `src/app.ts` la définition des _route handlers_ pour les pages statiques, p. ex. `/` vers `views/index.pug` et `/stats` vers `views/stats.pug`. Cela est important pour étendre le squelette dans le cadre du projet en équipe. Il y a aussi des pages statiques pour aider avec la gestion des connexions (`views/signin.pug` et `views/signout.pug`) qui sont intégrées également dans le squelette (routes et barre de navigation).
   - noter que la syntaxe des fichiers Pug est sensible à l'indentation (comme en Python). Si vous trouvez un exemple de code Pug à intégrer dans votre projet, l'éditeur VSCode va (par défaut) utiliser une indentation de 4 espaces, tandis que beaucoup d'exemples sur Internet utilisent 2 espaces.
-<!-- Note -- on évite de mettre les exemples concrets de code du squelette dans le tutoriel, car ça évolue et c'est difficile à synchroniser. Malheureusement le tutoriel est moins explicite à cause de ça. -->
+  <!-- Note -- on évite de mettre les exemples concrets de code du squelette dans le tutoriel, car ça évolue et c'est difficile à synchroniser. Malheureusement le tutoriel est moins explicite à cause de ça. -->
 
 ### 1. Actualiser la documentation de la fonctionnalité
 
@@ -278,9 +284,9 @@ Vous pouvez cocher chaque étape dans la liste suivante:
 La documentation des fonctionnalités se trouve dans le fichier [docs/Squelette.md](docs/Squelette.md). Dans cette étape, vous devez:
 
 - [ ] dans le fichier `docs/Squelette.md` qui sert de documentation, ajouter les informations pour vous identifier dans la section **Identification de l'étudiant**.  
-  Vérifier le travail avec le test, `npx jest --colors identification-lab0.test.ts`
+      Vérifier le travail avec le test, `npx jest --colors identification-lab0.test.ts`
 
-- [ ] dans le fichier `docs/Squelette.md`, ajouter le cas d'utilisation *Redémarrer* (texte) juste après [le texte du cas d'utilisation *Jouer aux dés*](docs/Squelette.md#jouer-aux-dés):
+- [ ] dans le fichier `docs/Squelette.md`, ajouter le cas d'utilisation _Redémarrer_ (texte) juste après [le texte du cas d'utilisation _Jouer aux dés_](docs/Squelette.md#jouer-aux-dés):
 
   ```markdown
   #### Redémarrer
@@ -293,7 +299,7 @@ La documentation des fonctionnalités se trouve dans le fichier [docs/Squelette.
 
   - installer l'extension [PlantUML](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml) dans VSCode
 
-  - visionner [cette vidéo](https://www.youtube.com/watch?v=xkwJ9GwgZJU) (*activer les sous-titres en français*) pour savoir comment créer et modifier un diagramme PlantUML
+  - visionner [cette vidéo](https://www.youtube.com/watch?v=xkwJ9GwgZJU) (_activer les sous-titres en français_) pour savoir comment créer et modifier un diagramme PlantUML
 
   - modifier `docs/modeles/dcu.puml` pour inclure un nouveau cas d'utilisation `(Redémarrer) as R #powderblue` et le lien avec l'acteur `J -- R` comme dans l'exemple partiel suivant:
 
@@ -314,16 +320,16 @@ La documentation des fonctionnalités se trouve dans le fichier [docs/Squelette.
   <details>
      <summary>Facultatif : faire en sorte que la documentation soit correctement liée aux fichiers `.puml`</summary><p>
 
-  *Question*: Comment faire en sorte que `docs/Squelette.md` affiche la version modifiée du fichier `docs/modeles/dcu.puml` après un *push* des fichiers vers GitHub?
-  *Réponse*: Il faut modifier le markdown suivant dans `docs/Squelette.md`:
+  _Question_: Comment faire en sorte que `docs/Squelette.md` affiche la version modifiée du fichier `docs/modeles/dcu.puml` après un _push_ des fichiers vers GitHub?
+  _Réponse_: Il faut modifier le markdown suivant dans `docs/Squelette.md`:
 
   ```markdown
   ### Diagramme de cas d'utilisation
 
-  ![Diagramme de cas d'utilisation](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/dcu.puml)
+  ![Diagramme de cas d'utilisation](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/cc-probitaille/laboratoire-0-fuyuka1d3su/refs/heads/master/docs/modeles/dcu.puml)
   ```
 
-  La partie de l'URL `src=https://raw.githubusercontent.com/profcfuhrmanets/log210-jeu-de-des-node-express-ts/master/docs/modeles/dcu.puml` doit pointer sur le fichier dans *votre* dépôt plutôt que sur celui duquel ce projet a été copié.
+  La partie de l'URL `src=https://raw.githubusercontent.com/cc-probitaille/laboratoire-0-fuyuka1d3su/refs/heads/master/docs/modeles/dcu.puml` doit pointer sur le fichier dans _votre_ dépôt plutôt que sur celui duquel ce projet a été copié.
 
   Pour obtenir l'URL "raw" d'un fichier sur GitHub, naviguez vers le fichier, cliquez sur le bouton **Raw**, puis copiez l'URL du navigateur. Finalement, cela doit être fait une seule fois pour chaque diagramme `.puml` et les changements vont suivre automatiquement dans la documentation. Cependant, il peut prendre quelques minutes avant que le cache du navigateur se rafraîchisse. Pour en savoir plus, lire [la question sur StackOverflow](https://stackoverflow.com/questions/32203610/how-to-integrate-uml-diagrams-into-gitlab-or-github).
   </details>
@@ -331,8 +337,8 @@ La documentation des fonctionnalités se trouve dans le fichier [docs/Squelette.
   <details>
      <summary>Facultatif : faire en sorte que la documentation soit correctement liée aux fichiers `.svg`</summary><p>
 
-  *Question*: Comment faire en sorte que `Squelette.md` affiche la version modifiée du fichier `docs/modeles/dcu.puml` après un *push* des fichiers vers GitHub?
-  *Réponse*: Il faut exporter les diagrammes puml à l'aide du menu contextuel  "Export current file diagrams" et modifier le markdown suivant dans `docs/Squelette.md`:
+  _Question_: Comment faire en sorte que `Squelette.md` affiche la version modifiée du fichier `docs/modeles/dcu.puml` après un _push_ des fichiers vers GitHub?
+  _Réponse_: Il faut exporter les diagrammes puml à l'aide du menu contextuel "Export current file diagrams" et modifier le markdown suivant dans `docs/Squelette.md`:
 
   ```markdown
   ### Diagramme de cas d'utilisation
@@ -366,7 +372,7 @@ La documentation des fonctionnalités se trouve dans le fichier [docs/Squelette.
 > Les modèles de conception guident l'implémentation. Vous aurez à revenir à cette section durant ce tutoriel.
 
 - [ ] ajouter un nouveau DSS `docs/modeles/dss-redemarrerJeu.puml` pour le cas d'utilisation (PlantUML)
-  
+
   Faire un diagramme en PlantUML qui ressemble à ceci:  
   ![DSS pour le scénario Redémarrer](https://www.plantuml.com/plantuml/svg/0/NOynQWD134NxEOLmvHGXlJ6B0waCQRAGNin-6v4TpKRI52RuFl4vzcAPf4c8Yjyy_d_euC4MhSp9tqGNDYxaSPdHqoJ_8nDEtEOuLGtb0dg5JQpyjult1isWZqJzdk7EPppESbRAq82bQmg9BdWQHrfgC_gMvVMcR59fByCBflLMs0osVv0XSOvgjDaTQqEp3R5JJbqNacLXZOx6YyVwMV03FUNxmMb7zZjqHDlU9Jf0f_xI5m00 "DSS pour le scénario Redémarrer")
 
@@ -390,7 +396,7 @@ La documentation des fonctionnalités se trouve dans le fichier [docs/Squelette.
   - ouvrir le fichier `test/routes/jeuRouter-redemarrerJeu-lab0.test.ts`
 
   - y créer une suite de tests nommée `'GET /api/v1/jeu/redemarrerJeu'` avec `describe`
-  
+
     Tous les tests reliés au cas d'utilisation y seront contenus
 
   - y utiliser `beforeAll` pour créer deux joueurs avant l'exécution des tests
@@ -406,9 +412,9 @@ La documentation des fonctionnalités se trouve dans le fichier [docs/Squelette.
     Le test doit vérifier qu'il n'y a plus de joueurs.
 
 - [ ] vérifier que les tests ne passent pas (Jest/SuperTest)
-  `npx jest --colors jeuRouter-redemarrerJeu-lab0.test.ts` va indiquer `n failed`
+      `npx jest --colors jeuRouter-redemarrerJeu-lab0.test.ts` va indiquer `n failed`
 
-  Cela est normal, car nous avons écrit plusieurs tests avant d'avoir écrit les fonctionnalités, selon la pratique de *Développement piloté par les tests*.
+  Cela est normal, car nous avons écrit plusieurs tests avant d'avoir écrit les fonctionnalités, selon la pratique de _Développement piloté par les tests_.
 
 ### 4. Écrire la fonctionnalité
 
@@ -425,6 +431,7 @@ La documentation des fonctionnalités se trouve dans le fichier [docs/Squelette.
   - ajouter la fonction `redemarrerJeu`, juste avant la fonction `init()`
 
     Elle doit :
+
     - avoir les mêmes paramètres que les autres fonctions.
     - appeler l'opération système créée précédemment
     - afficher à l'utilisateur (`flash`) que l'application redémarre
@@ -432,7 +439,7 @@ La documentation des fonctionnalités se trouve dans le fichier [docs/Squelette.
 
   - ajouter, à la fin de la fonction `init()`, une route `GET /redemarrerJeu` pour lier l'URI à `redemarrerJeu`
 
-    Il s'agit d'une *définition de [route](http://expressjs.com/en/guide/routing.html)* dans *Express*. Lorsqu'il y aura une requête HTTP `GET` avec `api/v1/jeu/redemarrerJeu`, la fonction `redemarrerJeu` dans la même classe sera appelée (*callback*). Cette fonction est aussi appelée un *route handler* en anglais.
+    Il s'agit d'une _définition de [route](http://expressjs.com/en/guide/routing.html)_ dans _Express_. Lorsqu'il y aura une requête HTTP `GET` avec `api/v1/jeu/redemarrerJeu`, la fonction `redemarrerJeu` dans la même classe sera appelée (_callback_). Cette fonction est aussi appelée un _route handler_ en anglais.
 
 - [ ] faire un build (Node.js)
 
@@ -448,7 +455,7 @@ La documentation des fonctionnalités se trouve dans le fichier [docs/Squelette.
 
   > Facultatif : pour une explication de PUG (anciennement Jade) avec Express, il y a [cette vidéo](https://www.youtube.com/watch?v=DSp9ExFw3Ig).
 
-  Dans `views/index.pug` après le texte ici, ajouter la ligne `button#redemarrer Redémarrer` (:warning: *attention à l'indentation*):
+  Dans `views/index.pug` après le texte ici, ajouter la ligne `button#redemarrer Redémarrer` (:warning: _attention à l'indentation_):
 
   ```PUG
       ul.entries
@@ -471,7 +478,7 @@ La documentation des fonctionnalités se trouve dans le fichier [docs/Squelette.
 
 - [ ] ajouter le JavaScript pour le bouton afin d'invoquer le nouveau service
 
-  Dans `public/lib/main.js` on trouve le code pour les boutons. Après la logique pour traiter le clic sur le bouton *Démarrer* (`demarrer.addEventListener("click", function(){...});`, ajouter une nouvelle logique pour le bouton *Redémarrer* qui fait un `GET` sur `/api/v1/jeu/redemarrerJeu`:
+  Dans `public/lib/main.js` on trouve le code pour les boutons. Après la logique pour traiter le clic sur le bouton _Démarrer_ (`demarrer.addEventListener("click", function(){...});`, ajouter une nouvelle logique pour le bouton _Redémarrer_ qui fait un `GET` sur `/api/v1/jeu/redemarrerJeu`:
 
   ```JavaScript
   document.getElementById("redemarrer").addEventListener("click", function () {
@@ -483,13 +490,14 @@ La documentation des fonctionnalités se trouve dans le fichier [docs/Squelette.
   });
   ```
 
-  Refaire le build et relancer le serveur dans le terminal. Recharger la page web et vérifier que le bouton fonctionne comme il le faut en créant une nouvelle partie pour un joueur et ensuite cliquant sur *Redémarrer*.
+  Refaire le build et relancer le serveur dans le terminal. Recharger la page web et vérifier que le bouton fonctionne comme il le faut en créant une nouvelle partie pour un joueur et ensuite cliquant sur _Redémarrer_.
 
 ### 5. Afficher le classement sur nouvelle page
 
 Il existe un lien dans la barre de navigation «Classement» pour la page `/stats`. Cependant, cette page n'affiche pas la colonne Ratio, car l'information n'est pas encore calculée.
 
-- [ ] Modifier le *route handler* dans `src/app.ts` et le gabarit `view/stats.pug` pour que le ratio se calcule et s'affiche. La classe `src/core/Joueur.ts` ne contient pas de propriété `ratio`, mais on peut la calculer dans le *route handler*. Il faut passer un nouveau tableau de joueurs, mais les objets doivent contenir une propriété `ratio` qui est le nombre de succès divisé par le nombre de tentatives. [Astuce sur stackoverflow](https://stackoverflow.com/a/44407980/1168342).
+- [ ] Modifier le _route handler_ dans `src/app.ts` et le gabarit `view/stats.pug` pour que le ratio se calcule et s'affiche. La classe `src/core/Joueur.ts` ne contient pas de propriété `ratio`, mais on peut la calculer dans le _route handler_. Il faut passer un nouveau tableau de joueurs, mais les objets doivent contenir une propriété `ratio` qui est le nombre de succès divisé par le nombre de tentatives. [Astuce sur stackoverflow](https://stackoverflow.com/a/44407980/1168342).
+
   ```typescript
   const joueurs: Array<Joueur> = JSON.parse(jeuRoutes.controleurJeu.joueurs);
   const joueursAvecRatio = /* à compléter en ajoutant joueur.ratio */;
@@ -515,7 +523,7 @@ Il existe un lien dans la barre de navigation «Classement» pour la page `/stat
 
 - [ ] Trier le tableau de `joueursAvecRatio` pour que le classement s'affiche en ordre décroissant par ratio. [Astuce sur stackoverflow](https://stackoverflow.com/a/21689268/1168342).
 
-  > Puisqu'il s'agit simplement d'une nouvelle vue sur les informations déjà présentes dans le système, on ne doit pas faire une RDCU. C'est-à-dire qu'on ne modifie pas *la logique d'affaires* ou l'état des objets du domaine.
+  > Puisqu'il s'agit simplement d'une nouvelle vue sur les informations déjà présentes dans le système, on ne doit pas faire une RDCU. C'est-à-dire qu'on ne modifie pas _la logique d'affaires_ ou l'état des objets du domaine.
 
 ### 6. Documenter les classes logicielles
 
@@ -525,20 +533,20 @@ Il existe un lien dans la barre de navigation «Classement» pour la page `/stat
 
 ### 7. Pratiquer ce qui a été appris
 
-- [ ] Modifier le cas d'utilisation *Jouer aux dés* pour que le joueur lance **trois** dés plutôt que deux et la condition pour gagner soit que le *total soit inférieur ou égal à 10*. Il faut passer par toutes les étapes, y compris modifier le MDD, les contrats, les RDCU, les tests et le code. Cependant, cette fois-ci vous devez vous débrouiller, en vous référant à des étapes plus haut.
+- [ ] Modifier le cas d'utilisation _Jouer aux dés_ pour que le joueur lance **trois** dés plutôt que deux et la condition pour gagner soit que le _total soit inférieur ou égal à 10_. Il faut passer par toutes les étapes, y compris modifier le MDD, les contrats, les RDCU, les tests et le code. Cependant, cette fois-ci vous devez vous débrouiller, en vous référant à des étapes plus haut.
   > ⚠️Certains tests de base du squelette lancés par `npx jest --colors --coverage --testPathIgnorePatterns=lab0.test.ts` ne seront plus bons, car ils valident les fonctionnalités du jeu avec **deux** dés.
   > Il faut les modifier pour la nouvelle fonctionnalité avec **trois** dés.
   > Certains de ces tests sont plus difficiles à faire passer, notamment ceux dans `test/core/jeuDeDes.test.ts` qui valident les valeurs retournées par la méthode `brasser()`.
   > En fait, la [probabilité d'avoir certaines valeurs (ex. 3 et 18) avec trois dés](https://fr.wikipedia.org/wiki/Probabilit%C3%A9s_des_d%C3%A9s) est faible (ex. 1/216 ≈ 0.5 %).
   > Il faut donc faire plus d'essais (jusqu'à 2000?) pour obtenir toutes les valeurs dans le test.
   > Faire autant d'essais dans un test n'est pas idéal puisque ça prend du temps.
-  > Il serait plus efficient si on utilisait des éléments de remplacement (un dé *temporaire* qui retourne toujours une même valeur), mais cette façon de faire (parfois appelée des [mocks](https://fr.wikipedia.org/wiki/Mock_(programmation_orient%C3%A9e_objet))) est hors du cadre du cours.
+  > Il serait plus efficient si on utilisait des éléments de remplacement (un dé _temporaire_ qui retourne toujours une même valeur), mais cette façon de faire (parfois appelée des [mocks](<https://fr.wikipedia.org/wiki/Mock_(programmation_orient%C3%A9e_objet)>)) est hors du cadre du cours.
 
 ### 8. Générer le rapport en format PDF
 
 - [ ] Assurez-vous de générer une version PDF de votre fichier `docs/Squelette.md` nommé `docs/lab0.pdf`
   > Un menu contextuel devrait vous permettre de réaliser cette tâche dans Visual Studio Code si vous avez installé les bonnes extensions.
-  > Il se peut que vous ayez à installer d'autres modules (un _exporter_ pour Chromium). 
+  > Il se peut que vous ayez à installer d'autres modules (un _exporter_ pour Chromium).
   > Il se peut que le fichier soit créé dans un répertoire `out/docs/` aussi avec le nom `Squelette.pdf`.
 
 ### 9. Apprendre à faire face aux parasites et aux mollassons dans une équipe
@@ -564,28 +572,28 @@ Assurez-vous qu'aucun test n'est en échec et que la couverture de test (`branch
 La seule rétroaction pour ce laboratoire est à travers les commandes ci-dessus.
 Vous n'aurez pas de rétroaction individuelle après la date de remise, alors si vous avez des tests qui ne passent pas ou des questions concernant les technologies, **c'est votre responsabilité de demander de l'aide de l'auxiliaire de laboratoire avant la remise.**
 
-### 11. Remettre (anglais *commit*) tous les changements sur la branche `master`
+### 11. Remettre (anglais _commit_) tous les changements sur la branche `master`
 
-- [ ] À l'aide de Zoom ou de tout autre outil d'enregistrement vidéo, enregistrez une démonstration du fonctionnement de l'interface utilisateur avec au moins 2 joueurs.  Sauvegarder le résultat dans le fichier **demo.mp4** et placer ce fichier dans le même répertoire que README.md.
+- [ ] À l'aide de Zoom ou de tout autre outil d'enregistrement vidéo, enregistrez une démonstration du fonctionnement de l'interface utilisateur avec au moins 2 joueurs. Sauvegarder le résultat dans le fichier **demo.mp4** et placer ce fichier dans le même répertoire que README.md.
 - [ ] Faire une remise de la solution du projet (GitHub) incluant votre réponse dans `docs/experience-parasites-mollassons.md`
 
 **Félicitations!** Vous avez réussi les défis technologiques nécessaires pour être performant dans les laboratoires de LOG210! Ce tutoriel vous sera sûrement utile pendant le développement du projet itératif à suivre, car il y a des [liens pour la documentation des technologies différentes](#technologies-vues-dans-cet-exercice).
 
-  > Si vous avez terminé rapidement grâce à votre expérience, pensez à aider vos coéquipiers qui pourraient toujours avoir des questions. Mais ne faites pas le travail à leur place, car le but est que toute l'équipe soit performante sur le plan technologique. Cherchez à augmenter le facteur de bus (voir les notes de cours pour l'explication) de l'équipe! En plus, le mentorat est une caractéristique importante du leadership.
+> Si vous avez terminé rapidement grâce à votre expérience, pensez à aider vos coéquipiers qui pourraient toujours avoir des questions. Mais ne faites pas le travail à leur place, car le but est que toute l'équipe soit performante sur le plan technologique. Cherchez à augmenter le facteur de bus (voir les notes de cours pour l'explication) de l'équipe! En plus, le mentorat est une caractéristique importante du leadership.
 
 ## Calcul de la note
 
 Le calcul de la note du laboratoire se fait à partir des résultats des tests automatiques roulés avec la commande `npx jest --coverage` (au début du projet et à la fin du projet) et une évaluation faite par l'auxiliaire d'enseignement:
 
-| variable | explication |
-|:-:|:-|
-| $e$ | 10 points si vous avez complété un texte d'au moins 300 mots dans `docs/experience-parasites-mollassons.md` (sinon 0 point)|
-| $b$ | nombre de nouveaux boutons fonctionnels (max 1)[^1]|
-| $c$ | 10 points si la page de classement fonctionne correctement (sinon 0 point)<sup>[\[1\]](#footnote1)</sup> |
-| $C$ | 10 points (bonis) multipliés par la couverture (%) de test de toutes les branches<sup>[\[1\]](#footnote1)</sup> |
-| $v$ | nombre de tests valides ("passed")|
-| $d$ | nombre de tests déjà valides au début du projet|
-| $t$ | nombre total de tests |
+| variable | explication                                                                                                                 |
+| :------: | :-------------------------------------------------------------------------------------------------------------------------- |
+|   $e$    | 10 points si vous avez complété un texte d'au moins 300 mots dans `docs/experience-parasites-mollassons.md` (sinon 0 point) |
+|   $b$    | nombre de nouveaux boutons fonctionnels (max 1)[^1]                                                                         |
+|   $c$    | 10 points si la page de classement fonctionne correctement (sinon 0 point)<sup>[\[1\]](#footnote1)</sup>                    |
+|   $C$    | 10 points (bonis) multipliés par la couverture (%) de test de toutes les branches<sup>[\[1\]](#footnote1)</sup>             |
+|   $v$    | nombre de tests valides ("passed")                                                                                          |
+|   $d$    | nombre de tests déjà valides au début du projet                                                                             |
+|   $t$    | nombre total de tests                                                                                                       |
 
 <a id="footnote1"></a>
 [^1]: évaluation faite par l'auxiliaire d'enseignement

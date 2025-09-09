@@ -28,6 +28,7 @@ html
         h3 Joueurs
         //- .entries est défini dans /css/style.css
         ul.entries
+        
           each joueur in joueurs
             li.joueur
               -var nom = joueur.nom;
@@ -42,3 +43,4 @@ html
             li
               em Pas de joueurs encore.
 
+        button#redemarrer Redémarrer

@@ -1,1 +1,10 @@
-// Vous devez compléter ce fichier
+@startuml 
+skinparam style strictuml
+skinparam defaultfontname Verdana
+title  **DSS pour le scénario //Redémarrer//**
+actor ":Joueur" as Player
+participant ":Système" as System
+Player -> System : redémarrerJeu()
+
+hide footbox
+@enduml

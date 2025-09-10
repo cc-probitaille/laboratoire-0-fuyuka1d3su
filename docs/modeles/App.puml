@@ -15,13 +15,12 @@ class Joueur {
     -_nbLancers: number
     -_nbLancersGagnes: number
     +nom: string
-    +ratio: number
     -assainirNom(nom: string): string
     +lancers: number
     +lancersGagnes: number
     +lancer(): void
     +gagner(): void
-    +toJSON(): { nom: string; lancers: number; lancersGagnes: number; ratio: number; }
+    +toJSON(): { nom: string; lancers: number; lancersGagnes: number; }
 }
 class NotFoundError extends AbstractError {
     +code: 404
@@ -33,6 +32,7 @@ class JeuDeDes {
     -_joueurs: Map<string, Joueur>
     -_d1: De
     -_d2: De
+    -_d3: De
     +demarrerJeu(nom: string): string
     +redemarrerJeu(): void
     +jouer(nom: string): string

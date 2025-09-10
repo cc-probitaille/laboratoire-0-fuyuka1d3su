@@ -1,16 +1,20 @@
-import 'jest-extended';
-import { readFileSync } from 'fs';
-import path from 'path';
+import "jest-extended";
+import { readFileSync } from "fs";
+import path from "path";
 
-let content = ""
+let content = "";
 beforeAll(async () => {
-  const filename = path.join('test', 'routes', 'jeuRouter-redemarrerJeu-lab0.test.ts');
-  content = readFileSync(filename, 'utf-8');
+  const filename = path.join(
+    "test",
+    "routes",
+    "jeuRouter-redemarrerJeu-lab0.test.ts"
+  );
+  content = readFileSync(filename, "utf-8");
 });
 
-describe('redemarrerJeu.test.ts', () => {
+describe("redemarrerJeu.test.ts", () => {
   it("devrait contenir \"get('/api/v1/jeu/redemarrerJeu')\"", () => {
-    expect(content.includes("get('/api/v1/jeu/redemarrerJeu')")).toBeTruthy();
+    expect(content.includes('get("/api/v1/jeu/redemarrerJeu")')).toBeTruthy();
   });
 
   it("devrait contenir un test pour jouer qui retourne 404 (après redemarrerJeu()", () => {

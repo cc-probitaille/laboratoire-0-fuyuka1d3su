@@ -6,6 +6,7 @@ participant ":JeuDeDes" as c
 participant "joueurs:\nMap<String,Joueur>" as jm
 participant "d1:De" as d1
 participant "d2:De" as d2
+participant "d3:De" as d3
 participant "j:Joueur" as j
 ->c : jouer(nom)
 note right : selon Contrôleur
@@ -19,9 +20,13 @@ c->d2 : brasser()
 note right : selon Expert
 c->d2 : v2 = valeur
 note right : selon Expert
+c->d3 : brasser()
+note right : selon Expert
+c->d3 : v3 = valeur
+note right : selon Expert
 c->j : incNbParties()
 note right : selon Expert
-opt v1 + v2 == 7
+opt v1 + v2 + v3 <= 10
   c->j : incNbPartiesGagnees()
   note right : selon Expert
 end opt

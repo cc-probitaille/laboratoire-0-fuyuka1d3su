@@ -1,34 +1,33 @@
-import 'jest-extended';
-import { JeuDeDes } from '../../src/core/jeuDeDes';
+import "jest-extended";
+import { JeuDeDes } from "../../src/core/jeuDeDes";
 
-describe('JeuDeDesTest', () => {
+describe("JeuDeDesTest", () => {
   let jdd: JeuDeDes;
   beforeEach(async () => {
     jdd = new JeuDeDes();
   });
 
   it(`devrait n'avoir aucun joueur au début`, async () => {
-    expect(jdd.joueurs).toEqual("[]")
-  })
+    expect(jdd.joueurs).toEqual("[]");
+  });
 
-  it('devrait retourner une valeur entre 2 et 12', () => {
+  it("devrait retourner une valeur entre 2 et 18", () => {
     for (let i = 0; i < 200; i++) {
-      expect(jdd.brasser()).toBeWithin(2, 13);
+      expect(jdd.brasser()).toBeWithin(2, 19);
     }
-  })
+  });
 
-  it('devrait retourner finalement toutes les valeurs entre 2 et 12', () => {
+  it("devrait retourner finalement toutes les valeurs entre 2 et 12", () => {
     const resultats = new Set();
     for (let i = 0; i < 200; i++) {
-      resultats.add(jdd.brasser())
+      resultats.add(jdd.brasser());
     }
-    expect(resultats.size).toBe(11);
-    for (let i = 1; i < 12; i++) {
+    expect(resultats.size).toBe(15);
+    for (let i = 1; i < 18; i++) {
       expect(resultats.has(i + 1)).toBeTrue();
     }
     // cas particuliers
     expect(resultats.has(1)).toBeFalsy();
     expect(resultats.has(13)).toBeFalsy();
-  })
-
+  });
 });

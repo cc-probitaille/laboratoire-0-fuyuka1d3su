@@ -1,0 +1,63 @@
+@startuml
+class De {
+    -_valeur: number
+    +brasser(): void
+    +valeur: number
+}
+abstract class default extends Error {
+    +{abstract} code: number
+}
+class InvalidParameterError extends AbstractError {
+    +code: 400
+}
+class Joueur {
+    -_nom: string
+    -_nbLancers: number
+    -_nbLancersGagnes: number
+    +nom: string
+    +ratio: number
+    -assainirNom(nom: string): string
+    +lancers: number
+    +lancersGagnes: number
+    +lancer(): void
+    +gagner(): void
+    +toJSON(): { nom: string; lancers: number; lancersGagnes: number; ratio: number; }
+}
+class NotFoundError extends AbstractError {
+    +code: 404
+}
+class AlreadyExistsError extends AbstractError {
+    +code: 400
+}
+class JeuDeDes {
+    -_joueurs: Map<string, Joueur>
+    -_d1: De
+    -_d2: De
+    +demarrerJeu(nom: string): string
+    +redemarrerJeu(): void
+    +jouer(nom: string): string
+    +terminerJeu(nom: string): string
+    +brasser(): number
+    +joueurs: string
+}
+class JeuRouter {
+    -_router: Router
+    -_controleurJeu: JeuDeDes
+    +controleurJeu: JeuDeDes
+    +router: Router
+    +demarrerJeu(req: Request<ParamsDictionary, any, any, QueryString.ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): void
+    +redemarrerJeu(req: Request<ParamsDictionary, any, any, QueryString.ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): void
+    +jouer(req: Request<ParamsDictionary, any, any, QueryString.ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): void
+    -_errorCode500(error: any, req: Request<ParamsDictionary, any, any, QueryString.ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>): void
+    +terminerJeu(req: Request<ParamsDictionary, any, any, QueryString.ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): void
+    +init(): void
+}
+class App {
+    +expressApp: express.Application
+    -middleware(): void
+    -routes(): void
+}
+JeuDeDes --> "1" Joueur
+JeuDeDes --> "1" De
+JeuRouter --> "1" JeuDeDes
+@enduml

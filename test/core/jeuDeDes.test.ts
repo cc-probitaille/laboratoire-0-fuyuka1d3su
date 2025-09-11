@@ -11,23 +11,25 @@ describe("JeuDeDesTest", () => {
     expect(jdd.joueurs).toEqual("[]");
   });
 
-  it("devrait retourner une valeur entre 2 et 18", () => {
+  it("devrait retourner une valeur entre 2 et 19", () => {
     for (let i = 0; i < 200; i++) {
       expect(jdd.brasser()).toBeWithin(2, 19);
     }
   });
 
-  it("devrait retourner finalement toutes les valeurs entre 2 et 12", () => {
+  it("devrait retourner finalement toutes les valeurs entre 2 et 19", () => {
     const resultats = new Set();
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 2000; i++) {
       resultats.add(jdd.brasser());
     }
-    expect(resultats.size).toBe(15);
-    for (let i = 1; i < 18; i++) {
+    // nombre UNIQUE, résultats possibles sont : [3, 4, ..., 17, 18], donc 18-3+1=16
+    expect(resultats.size).toBe(16);
+    for (let i = 2; i < 17; i++) {
       expect(resultats.has(i + 1)).toBeTrue();
     }
     // cas particuliers
     expect(resultats.has(1)).toBeFalsy();
-    expect(resultats.has(13)).toBeFalsy();
+    expect(resultats.has(2)).toBeFalsy();
+    expect(resultats.has(19)).toBeFalsy();
   });
 });
